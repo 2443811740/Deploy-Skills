@@ -1,0 +1,34 @@
+---
+name: <skill-name>
+description: <what this skill does, when to use it, and when not to use it>
+version: 0.1.0
+---
+
+# <Skill Title>
+
+## Scope
+
+<Supported and unsupported scenarios.>
+
+## Required Inputs
+
+<Inputs that must be known before execution.>
+
+## Workflow
+
+1. <Preparation step>
+2. <Execution step>
+3. <Validation step>
+4. <Cleanup or rollback step>
+
+## Safety Constraints
+
+<Operations that require confirmation or must never be performed automatically.>
+
+## Validation
+
+<Success criteria and evidence to collect.>
+
+## References
+
+<Local references, scripts, examples, or authoritative documentation.>

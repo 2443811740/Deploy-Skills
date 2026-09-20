@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "run_id": "<unique-id>",
+  "source": {
+    "revision": "<revision>",
+    "wrapper": "<deploy-wrapper>",
+    "checkpoint_sha256": "<sha256>"
+  },
+  "onnx": {
+    "file": "<relative-path>",
+    "sha256": "<sha256>",
+    "opset": 0,
+    "inspection_report": "<relative-path>"
+  },
+  "environment": {
+    "container": "<image-or-manifest>",
+    "os": "<os>",
+    "tensorrt": "<version>",
+    "cuda": "<version>",
+    "driver": "<version>",
+    "gpu": "<model>",
+    "compute_capability": "<major.minor>"
+  },
+  "builder": {
+    "command": "<reproducible-command>",
+    "precision": "<fp32-fp16-int8>",
+    "workspace_bytes": 0,
+    "flags": [],
+    "profiles": [],
+    "timing_cache_sha256": null,
+    "calibration_cache_sha256": null
+  },
+  "plugins": [
+    {
+      "file": "<relative-path>",
+      "sha256": "<sha256>",
+      "creator_name": "<name>",
+      "creator_version": "<version>",
+      "namespace": "<namespace>"
+    }
+  ],
+  "engine": {
+    "file": "<relative-path>",
+    "sha256": "<sha256>"
+  },
+  "validation": {
+    "prepared_inputs_manifest": "<relative-path>",
+    "thresholds": {},
+    "wrapper_vs_onnx": "<pass-fail-not-run>",
+    "onnx_vs_tensorrt": "<pass-fail-not-run>",
+    "runtime_smoke": "<pass-fail-not-run>",
+    "postprocess": "<pass-fail-not-run>"
+  }
+}

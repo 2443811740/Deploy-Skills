@@ -1,0 +1,104 @@
+{
+  "skillsRoot": ".deploy/skills",
+  "modules": {
+    "router": {
+      "title": "Deployment Router",
+      "skills": [
+        "deploy-router"
+      ]
+    },
+    "consistency": {
+      "title": "Inference Consistency",
+      "skills": [
+        "model-version-adaptation",
+        "bc-hbm-consistency",
+        "pipeline-integration-consistency"
+      ]
+    },
+    "model-export": {
+      "title": "Model Export",
+      "skills": [
+        "x86-onnx-tensorrt"
+      ]
+    },
+    "governance": {
+      "title": "Skill Governance",
+      "skills": [
+        "deployment-session-intake",
+        "alignment-skill-journal"
+      ]
+    }
+  },
+  "paths": {
+    "deploy-router": {
+      "version": "0.3.0",
+      "module": "router",
+      "path": ".deploy/skills/deploy-router",
+      "skillFile": ".deploy/skills/deploy-router/SKILL.md",
+      "description": "部署任务顶层路由入口。覆盖模型版本适配、推理与集成一致性、ONNX/TensorRT 模型导出及尚未明确归属的部署请求。"
+    },
+    "consistency": {
+      "version": "0.3.0",
+      "module": "consistency",
+      "path": ".deploy/skills/consistency",
+      "skillFile": ".deploy/skills/consistency/SKILL.md",
+      "description": "模型版本适配、推理和多节点集成一致性路由。覆盖变更文档驱动 C++ 适配、板端验收、开环分析、闭环回放及 Flow/坐标契约。"
+    },
+    "bc-hbm-consistency": {
+      "version": "0.1.0",
+      "module": "consistency",
+      "path": ".deploy/skills/consistency/bc-hbm-consistency",
+      "skillFile": ".deploy/skills/consistency/bc-hbm-consistency/SKILL.md",
+      "description": "对齐 Python BC 与 C++ HBM 推理。适用于服务器/板端结果不一致、NPY dump 与输入回放、LiDAR/图像前处理、量化、padding、cache 和后处理一致性定位。"
+    },
+    "pipeline-integration-consistency": {
+      "version": "0.1.0",
+      "module": "consistency",
+      "path": ".deploy/skills/consistency/pipeline-integration-consistency",
+      "skillFile": ".deploy/skills/consistency/pipeline-integration-consistency/SKILL.md",
+      "description": "验证共享前处理、多节点或多模型部署链路的消息、坐标、相机顺序、稳定索引、Optional 输入和兼容迁移。"
+    },
+    "model-export": {
+      "version": "0.1.0",
+      "module": "model-export",
+      "path": ".deploy/skills/model-export",
+      "skillFile": ".deploy/skills/model-export/SKILL.md",
+      "description": "模型导出与运行时产物构建模块路由，用于 ONNX、TensorRT、custom op、plugin 和 engine 构建任务。"
+    },
+    "x86-onnx-tensorrt": {
+      "version": "0.1.0",
+      "module": "model-export",
+      "path": ".deploy/skills/model-export/x86-onnx-tensorrt",
+      "skillFile": ".deploy/skills/model-export/x86-onnx-tensorrt/SKILL.md",
+      "description": "从部署态 wrapper 导出 x86 ONNX，检查算子与 plugin 契约，构建 TensorRT engine，并用 prepared inputs 做 raw output 对齐。"
+    },
+    "model-version-adaptation": {
+      "version": "0.1.0",
+      "module": "consistency",
+      "path": ".deploy/skills/consistency/model-version-adaptation",
+      "skillFile": ".deploy/skills/consistency/model-version-adaptation/SKILL.md",
+      "description": "按变更文档完成模型版本 C++ 适配和板端可视化验收；不对齐时依次执行开环代码分析、闭环 BC dump/HBM 回放和异构后端差异定位。"
+    },
+    "governance": {
+      "version": "0.2.0",
+      "module": "governance",
+      "path": ".deploy/skills/governance",
+      "skillFile": ".deploy/skills/governance/SKILL.md",
+      "description": "Deploy Skills 治理路由：新对话环境问询，以及开发后的候选经验评估、去重、评审和晋升。"
+    },
+    "alignment-skill-journal": {
+      "version": "0.1.0",
+      "module": "governance",
+      "path": ".deploy/skills/governance/alignment-skill-journal",
+      "skillFile": ".deploy/skills/governance/alignment-skill-journal/SKILL.md",
+      "description": "每次开发结束后自动评估是否产生新的对齐 Skill 候选；命中时写入工作区临时日志，并支持去重、证据增强和定期晋升。"
+    },
+    "deployment-session-intake": {
+      "version": "0.1.0",
+      "module": "governance",
+      "path": ".deploy/skills/governance/deployment-session-intake",
+      "skillFile": ".deploy/skills/governance/deployment-session-intake/SKILL.md",
+      "description": "每次新对话开始时强制收集本次任务的编译命令、Python/BC 服务器与推理命令、部署方式、板端环境准备和验收契约；同一对话复用，跨对话重新询问。"
+    }
+  }
+}

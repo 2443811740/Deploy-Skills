@@ -1,0 +1,55 @@
+# Inference Consistency Report
+
+## Run Contract
+
+| Field | Reference | Target |
+|-------|-----------|--------|
+| Runtime | | |
+| Code revision | | |
+| Model SHA256 | | |
+| Config SHA256 | | |
+| Command | | |
+| Sample/frame | | |
+
+## Thresholds
+
+| Layer | Metric | Threshold |
+|-------|--------|-----------|
+| Raw Tensor | | |
+| Semantic output | | |
+
+## Experiment Matrix
+
+| Experiment | Replaced inputs | Raw result | Semantic result | Conclusion |
+|------------|-----------------|------------|-----------------|------------|
+| native | none | | | |
+| all-reference | all | | | |
+| group-reference | | | | |
+| single-or-stage | | | | |
+| fixed-native | none | | | |
+
+## Earliest Divergence
+
+- Stage:
+- Reference behavior:
+- Target behavior:
+- Evidence:
+- Threshold:
+
+## Root Cause and Fix
+
+- Root cause:
+- Minimal retained change:
+- Rejected hypotheses:
+- Affected callers:
+
+## Final Validation
+
+- Build command and result:
+- Artifact name and SHA256:
+- Deployment verification:
+- Native runtime command and exit status:
+- Debug override state:
+- Output comparison:
+- Remaining risks:
+- Rollback path:

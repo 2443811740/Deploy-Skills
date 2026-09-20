@@ -1,0 +1,40 @@
+# Pipeline Edge Contract
+
+## Scope
+
+- Top-level entry:
+- Requested output:
+- Repositories/components:
+- Sample/frame:
+- Versions and config hashes:
+
+## Execution Graph
+
+```text
+<producer> --<message/slot>--> <consumer>
+```
+
+## Edge Table
+
+| Edge | Producer/slot | Consumer/slot | Message type | Shape/count | Order | Coordinate space | Stable identity | Optional behavior | Owner/lifetime |
+|------|---------------|---------------|--------------|-------------|-------|------------------|-----------------|-------------------|----------------|
+| | | | | | | | | | |
+
+## Compatibility Matrix
+
+| Case | Expected behavior | Validation evidence | Result |
+|------|-------------------|---------------------|--------|
+| Old config + old input | | | |
+| New config + new input | | | |
+| Missing Optional input | | | |
+| Consecutive frames | | | |
+| Reset/new sequence | | | |
+
+## Earliest Divergence
+
+- Edge:
+- Expected:
+- Actual:
+- Evidence:
+- Root cause:
+- Minimal fix:

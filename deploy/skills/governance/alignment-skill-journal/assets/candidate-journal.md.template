@@ -1,0 +1,15 @@
+# Alignment Skill Candidate Journal
+
+> Workspace-local temporary journal. Setup and package upgrades must not overwrite this file.
+> Formal Skills remain authoritative until a candidate is explicitly promoted.
+
+## Usage
+
+- After each validated development task, evaluate whether a new reusable alignment method was discovered.
+- Add or update an entry only when the candidate gate is satisfied.
+- Deduplicate by candidate key; repeated sightings strengthen the same entry.
+- Never store passwords, tokens, private keys, or unredacted credentials.
+
+## Pending Candidates
+
+<!-- Append candidate entries below this line. -->

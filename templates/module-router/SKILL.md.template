@@ -1,0 +1,23 @@
+---
+name: <module-name>
+description: <module router description and trigger conditions>
+version: 0.1.0
+---
+
+# <Module Title>
+
+## Scope
+
+<Define what this module routes and what is out of scope.>
+
+## Routing Table
+
+| skill_name | trigger_keywords | priority | enabled |
+|------------|------------------|----------|---------|
+| `<skill-name>` | `<keywords>` | 10 | true |
+
+## Routing Rules
+
+1. Match the user request against the routing table.
+2. Read the matched child `SKILL.md` before execution.
+3. Ask for clarification when no route can be selected safely.

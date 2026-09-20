@@ -1,0 +1,68 @@
+# Model Version Adaptation Report
+
+## Version Baseline
+
+| Item | Baseline | Target |
+|------|----------|--------|
+| Code revision | | |
+| Model SHA256 | | |
+| Config SHA256 | | |
+| Runtime/toolchain | | |
+| Sample/frame | | |
+
+## Change Impact Matrix
+
+| Change ID | Document statement | Status | Evidence | C++ owner | Change | Validation |
+|-----------|--------------------|--------|----------|-----------|--------|------------|
+| | | confirmed/assumed/unknown | | | | |
+
+## Board Validation
+
+- Artifact SHA256:
+- Device model/runtime:
+- Exit status and logs:
+- Structured metrics:
+- Visualization comparison:
+- Decision: aligned / continue open-loop analysis
+
+## Open-loop Analysis
+
+| Stage | Python BC | C++ target | Difference | Evidence |
+|-------|-----------|------------|------------|----------|
+| Input | | | | |
+| Preprocess | | | | |
+| Binding/runtime | | | | |
+| Raw output | | | | |
+| Decode/result | | | | |
+
+- Decision: root cause found / escalate to closed-loop
+
+## Closed-loop Experiments
+
+| Experiment | Replaced data | Raw result | Semantic result | Conclusion |
+|------------|---------------|------------|-----------------|------------|
+| all-reference | | | | |
+| group-reference | | | | |
+| single-or-stage | | | | |
+| fixed-native | none | | | |
+
+## Heterogeneous Backend Evidence
+
+| Lane | Backend | Artifact/result | Metrics |
+|------|---------|-----------------|---------|
+| Python production | | | |
+| Python CPU equivalent | | | |
+| C++ target | | | |
+
+- Accepted thresholds:
+- Attribution:
+- Remaining risk:
+
+## Finalization
+
+- Root cause:
+- Minimal retained changes:
+- Final build/deployment hashes:
+- Native C++ validation:
+- Debug switches removed/disabled:
+- Rollback:

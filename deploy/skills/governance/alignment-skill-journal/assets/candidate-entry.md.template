@@ -1,0 +1,53 @@
+## ASC-<candidate-key>
+
+- status: candidate
+- evidence_level: observed
+- first_seen: <ISO-8601 timestamp>
+- last_seen: <ISO-8601 timestamp>
+- occurrence_count: 1
+- proposed_action: <new-skill|skill-extension|routing-trigger|reference|script>
+- proposed_target: <formal skill or new skill name>
+- formal_skills_checked: <comma-separated names>
+
+### Trigger
+
+<When this method should be used.>
+
+### Not Applicable
+
+<When this method should not be used.>
+
+### Reusable Problem
+
+<Problem stated without project-specific names or values.>
+
+### Reusable Method
+
+1. <Step>
+2. <Step>
+3. <Validation or escalation step>
+
+### Cheapest Discriminating Check
+
+<The lowest-cost check that distinguishes the relevant hypotheses.>
+
+### Evidence
+
+- task/workspace: <sanitized context>
+- code/config evidence: <relative paths or symbols>
+- command/experiment: <sanitized command or experiment>
+- observed result: <measured result>
+- validation: <what passed, failed, or remains unverified>
+
+### General Rule vs Project Facts
+
+- general rule: <candidate Skill content>
+- project facts: <model names, paths, parameters, or one-off details kept out of formal Skill>
+
+### Occurrences
+
+- <timestamp>: <task and incremental evidence>
+
+### Promotion Requirements
+
+- [ ] <additional validation or cleanup>

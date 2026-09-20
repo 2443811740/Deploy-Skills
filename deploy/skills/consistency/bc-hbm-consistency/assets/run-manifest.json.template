@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "run_id": "<timestamp-or-unique-id>",
+  "sample_id": "<frame-or-sample-id>",
+  "reference": {
+    "runtime": "bc",
+    "code_revision": "<revision>",
+    "command": "<reference-command>",
+    "model_file": "<relative-model-path>",
+    "model_sha256": "<sha256>",
+    "config_file": "<relative-config-path>",
+    "config_sha256": "<sha256>"
+  },
+  "target": {
+    "runtime": "hbm",
+    "code_revision": "<revision>",
+    "command": "<target-command>",
+    "model_file": "<relative-model-path>",
+    "model_sha256": "<sha256>",
+    "config_file": "<relative-config-path>",
+    "config_sha256": "<sha256>"
+  },
+  "thresholds": {
+    "tensor_atol": 0.0,
+    "tensor_rtol": 0.0,
+    "semantic": "<project-defined-threshold>"
+  },
+  "tensors": [
+    {
+      "name": "<tensor-name>",
+      "index": 0,
+      "group": "<camera-lidar-temporal-or-other>",
+      "direction": "input",
+      "file": "inputs/<tensor-file>.npy",
+      "dtype": "uint8",
+      "shape": [1, 1],
+      "layout": "<layout>",
+      "quantization": {
+        "state": "already-quantized",
+        "scale": null,
+        "zero_point": null,
+        "axis": null
+      },
+      "valid_shape": [1, 1],
+      "aligned_shape": [1, 1],
+      "sha256": "<sha256>"
+    }
+  ]
+}
