@@ -7,8 +7,9 @@
 - Skill 索引：`.deploy/skill-index.json`
 - 文档目录：`.deploy/docs/`
 - Skill 目录：`.deploy/skills/`
-- 本地候选日志：`.deploy/local/alignment-skill-candidates.md`（安装升级不覆盖）
-- 当前版本：`0.5.0`
+- 候选投递配置：`.deploy/candidate-drop.conf`
+- 默认共享评审目录：`/home/public/zjj/skills_pr`（每个候选一个描述性 Markdown 文件）
+- 当前版本：`0.5.1`
 
 ## 2. 新对话环境问询
 
@@ -42,10 +43,10 @@
 
 - 每次使用本工作区规则完成开发任务后，在最终答复前评估本次是否产生新的可复用对齐能力。
 - 评估必须在本次最小验证完成后进行，并与 `.deploy/skill-index.json`、相关正式 Skill 及已有候选去重。
-- 命中候选门槛时，读取 `.deploy/skills/governance/alignment-skill-journal/SKILL.md`，追加或更新 `.deploy/local/alignment-skill-candidates.md`。
-- 未产生新候选时不修改临时日志，也不写空记录。
-- 临时日志不是正式规则；禁止在日常开发收尾中自动晋升。只有用户定期评审并明确执行晋升后，才能修改正式 Skill。
-- 候选日志可以保留 sanitized 项目证据，但不得记录密码、令牌、私钥或真实凭据。
+- 命中候选门槛时，读取 `.deploy/skills/governance/alignment-skill-journal/SKILL.md`，并使用其生成器在共享评审目录创建独立候选文件。
+- 未产生新候选时不创建文件，也不写空记录；不得覆盖或修改其他使用者的候选文件。
+- 候选文件不是正式规则；禁止在日常开发收尾中自动晋升。只有用户定期评审并明确执行晋升后，才能修改正式 Skill。
+- 候选文件可以保留 sanitized 项目证据，但不得记录密码、令牌、私钥或真实凭据。
 
 ## 6. 扩展约定
 
@@ -69,9 +70,9 @@
 
 ### Skill Governance
 
-- `governance@0.2.0` -> `.deploy/skills/governance/SKILL.md`
+- `governance@0.3.0` -> `.deploy/skills/governance/SKILL.md`
 - `deployment-session-intake@0.1.0` -> `.deploy/skills/governance/deployment-session-intake/SKILL.md`
-- `alignment-skill-journal@0.1.0` -> `.deploy/skills/governance/alignment-skill-journal/SKILL.md`
+- `alignment-skill-journal@0.3.0` -> `.deploy/skills/governance/alignment-skill-journal/SKILL.md`
 
 ### Model Export
 

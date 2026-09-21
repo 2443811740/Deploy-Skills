@@ -1,7 +1,7 @@
 ---
 name: governance
 description: "Deploy Skills 治理路由。Use when: 新对话开始需要收集编译、Python/BC 参考链路、部署和板端环境，或开发结束需要评估、记录、去重和晋升新的对齐 Skill 候选。"
-version: 0.2.0
+version: 0.3.0
 ---
 
 # Skill Governance Router
@@ -17,5 +17,5 @@ version: 0.2.0
 
 1. 新对话开始时由 `.deploy/DEPLOY.md` 直接触发 [deployment-session-intake](./deployment-session-intake/SKILL.md)。
 2. 开发任务结束时由 `.deploy/DEPLOY.md` 直接触发 [alignment-skill-journal](./alignment-skill-journal/SKILL.md)。
-3. 会话问询答案只在当前对话内复用；候选经验写入工作区本地日志。
-4. 候选日志不能自动修改正式 Skill，晋升必须经过独立评审和验证。
+3. 会话问询答案只在当前对话内复用；候选经验以独立文件写入共享评审目录。
+4. 候选文件不能自动修改正式 Skill，晋升必须经过独立评审和验证。

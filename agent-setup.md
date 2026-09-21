@@ -27,6 +27,10 @@ test -f "$PROJECT_ROOT/.deploy/DEPLOY.md"
 test -f "$PROJECT_ROOT/.deploy/VERSION"
 test -f "$PROJECT_ROOT/.deploy/skill-index.json"
 test -f "$PROJECT_ROOT/.deploy/skills/deploy-router/SKILL.md"
+test -f "$PROJECT_ROOT/.deploy/candidate-drop.conf"
+test -x "$PROJECT_ROOT/.deploy/skills/governance/alignment-skill-journal/scripts/create_candidate.py"
+test -d /home/public/zjj/skills_pr
+test -w /home/public/zjj/skills_pr
 ```
 
 ## 6. 使用入口

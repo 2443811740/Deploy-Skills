@@ -1,6 +1,6 @@
 # Deploy Skills
 
-An Agent Skills collection for deployment workflows, organized as an installable workspace package with a JSON index, progressive routers, leaf skills, references, assets, and scripts. Current version: `0.5.0`.
+An Agent Skills collection for deployment workflows, organized as an installable workspace package with a JSON index, progressive routers, leaf skills, references, assets, and scripts. Current version: `0.5.1`.
 
 ## Included Modules
 
@@ -13,7 +13,7 @@ An Agent Skills collection for deployment workflows, organized as an installable
 ### Skill Governance
 
 - `deployment-session-intake`: at the start of every new conversation, collect build commands, BC server and inference commands, deployment method, target environment, and acceptance criteria; reuse only within that conversation.
-- `alignment-skill-journal`: after validated development work, evaluate and record new alignment Skill candidates for later human promotion.
+- `alignment-skill-journal`: after validated development work, create descriptively named candidate files in a shared review directory for later human promotion.
 
 ### Model Export
 
@@ -28,6 +28,14 @@ bash setup.sh <project-root>
 ```
 
 Resources are installed under `<project-root>/.deploy/`. Existing `AGENTS.md` or `CLAUDE.md` files receive an idempotent routing rule. Paths in `skill-index.json` are relative to the installed project root, so they intentionally use `.deploy/` rather than the source package's `deploy/` directory.
+
+The installer copies `.deploy/candidate-drop.conf` and the candidate generator. Candidates default to `/home/public/zjj/skills_pr`, with one `<task-summary>__<new-skill-summary>__<UTC-time>.md` file per contribution. Name collisions gain a numeric suffix and never overwrite existing files. Submission requires neither network access nor Git permissions; reviewers periodically promote selected candidates into the formal Skills repository.
+
+An administrator initializes the shared directory once. The sticky bit lets every user create files while preventing users from deleting or renaming files owned by others:
+
+```bash
+install -d -m 1777 /home/public/zjj/skills_pr
+```
 
 Installation overwrites managed files but does not delete files that no longer exist in the source package, avoiding accidental removal of project-owned resources. The registered entries in `skill-index.json` remain authoritative after an upgrade.
 

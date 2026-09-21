@@ -32,25 +32,34 @@ for directory in docs skills; do
   fi
 done
 
-for file in DEPLOY.md skill-index.json VERSION; do
+for file in candidate-drop.conf DEPLOY.md skill-index.json VERSION; do
   if [ -f "$DEPLOY_SRC/$file" ]; then
     cp "$DEPLOY_SRC/$file" "$DEPLOY_DST/$file"
     echo "  [ok] $file"
   fi
 done
 
+OBSOLETE_CANDIDATE_TEMPLATE="$DEPLOY_DST/skills/governance/alignment-skill-journal/assets/candidate-journal.md.template"
+if [ -f "$OBSOLETE_CANDIDATE_TEMPLATE" ]; then
+  rm "$OBSOLETE_CANDIDATE_TEMPLATE"
+  echo "  [ok] obsolete candidate journal template removed"
+fi
+
 LOCAL_DIR="$DEPLOY_DST/local"
-CANDIDATE_JOURNAL="$LOCAL_DIR/alignment-skill-candidates.md"
-CANDIDATE_TEMPLATE="$DEPLOY_SRC/skills/governance/alignment-skill-journal/assets/candidate-journal.md.template"
+LEGACY_CANDIDATE_JOURNAL="$LOCAL_DIR/alignment-skill-candidates.md"
 mkdir -p "$LOCAL_DIR"
-if [ -f "$CANDIDATE_JOURNAL" ]; then
-  echo "  [keep] local/alignment-skill-candidates.md"
-elif [ -f "$CANDIDATE_TEMPLATE" ]; then
-  cp "$CANDIDATE_TEMPLATE" "$CANDIDATE_JOURNAL"
-  echo "  [ok] local/alignment-skill-candidates.md (initialized)"
-else
-  echo "  [fail] candidate journal template is missing" >&2
-  exit 1
+rm -f "$LOCAL_DIR/source-repository"
+if [ -f "$LEGACY_CANDIDATE_JOURNAL" ]; then
+  if awk '
+    $0 == "<!-- Append candidate entries below this line. -->" { marker = 1; next }
+    marker && $0 !~ /^[[:space:]]*$/ { content = 1 }
+    END { exit !(marker && !content) }
+  ' "$LEGACY_CANDIDATE_JOURNAL"; then
+    rm "$LEGACY_CANDIDATE_JOURNAL"
+    echo "  [ok] empty legacy candidate journal removed"
+  else
+    echo "  [warn] legacy candidate journal retained; new candidates use the shared drop directory: $LEGACY_CANDIDATE_JOURNAL" >&2
+  fi
 fi
 
 MARKER='# Deployment Workspace Rules'
@@ -62,7 +71,7 @@ $MARKER
 If the user request involves deployment, follow the project rules in .deploy/DEPLOY.md.
 At the start of every new conversation, before the first development action, follow .deploy/skills/governance/deployment-session-intake/SKILL.md. Ask for the task scope, exact build command, Python/BC server and inference command, deployment method, target-board environment and run command, and acceptance criteria. Reuse answers only within the current conversation.
 Use .deploy/skill-index.json to locate the matching skill, and read that skill before execution.
-After every development task governed by .deploy, evaluate whether the work produced a new reusable alignment skill candidate. Follow .deploy/skills/governance/alignment-skill-journal/SKILL.md and update .deploy/local/alignment-skill-candidates.md only when the candidate gate is satisfied.
+After every development task governed by .deploy, evaluate whether the work produced a new reusable alignment skill candidate. Follow .deploy/skills/governance/alignment-skill-journal/SKILL.md and create one descriptively named Markdown file in the configured shared candidate directory when the candidate gate is satisfied.
 $END_MARKER"
 
 INJECTED=0
@@ -119,12 +128,35 @@ if [ "$INJECTED" -eq 0 ]; then
 fi
 
 ERRORS=0
-for file in DEPLOY.md skill-index.json VERSION skills/deploy-router/SKILL.md local/alignment-skill-candidates.md; do
+for file in candidate-drop.conf DEPLOY.md skill-index.json VERSION skills/deploy-router/SKILL.md skills/governance/alignment-skill-journal/scripts/create_candidate.py; do
   if [ ! -f "$DEPLOY_DST/$file" ]; then
     echo "  [fail] missing $file" >&2
     ERRORS=$((ERRORS + 1))
   fi
 done
+
+CANDIDATE_DROP_CONFIG="$DEPLOY_DST/candidate-drop.conf"
+if [ -f "$CANDIDATE_DROP_CONFIG" ]; then
+  if ! CANDIDATE_DROP_DIR="$(awk '
+    /^[[:space:]]*#/ || /^[[:space:]]*$/ { next }
+    { path = $0; count += 1 }
+    END { if (count != 1) exit 1; print path }
+  ' "$CANDIDATE_DROP_CONFIG")"; then
+    echo "  [fail] candidate-drop.conf must contain exactly one directory path" >&2
+    ERRORS=$((ERRORS + 1))
+  elif [[ "$CANDIDATE_DROP_DIR" != /* ]]; then
+    echo "  [fail] candidate drop directory must be absolute: $CANDIDATE_DROP_DIR" >&2
+    ERRORS=$((ERRORS + 1))
+  elif [ ! -d "$CANDIDATE_DROP_DIR" ]; then
+    echo "  [fail] candidate drop directory does not exist: $CANDIDATE_DROP_DIR" >&2
+    ERRORS=$((ERRORS + 1))
+  elif [ ! -w "$CANDIDATE_DROP_DIR" ]; then
+    echo "  [fail] candidate drop directory is not writable: $CANDIDATE_DROP_DIR" >&2
+    ERRORS=$((ERRORS + 1))
+  else
+    echo "  [ok] candidate drop directory: $CANDIDATE_DROP_DIR"
+  fi
+fi
 
 if [ "$ERRORS" -gt 0 ]; then
   echo "==> Installation completed with $ERRORS error(s)" >&2

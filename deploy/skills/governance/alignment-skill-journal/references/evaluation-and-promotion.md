@@ -23,7 +23,7 @@
 5. 是否知道何时不应使用？
 6. 是否能说明应新增还是扩展哪个正式 Skill？
 
-前四项任一为否时，不进入候选日志；可在本次任务报告中保留为项目事实。
+前四项任一为否时，不创建候选文件；可在本次任务报告中保留为项目事实。
 
 ## Deduplication
 
@@ -34,13 +34,11 @@ bc-hbm-consistency/compare-runtime-boundary-before-preprocess
 model-version-adaptation/three-way-cpu-control-for-cuda-differences
 ```
 
-不要使用日期、文件名、模型名或 issue 编号作为核心键。发现相同键时更新原条目：
+不要使用日期、文件名、模型名或 issue 编号作为核心键。扫描共享目录中的 `candidate_key` 和同义描述：
 
-- `last_seen`
-- `occurrence_count`
-- `evidence_level`
-- `occurrences`
-- `promotion_requirements`
+- 相同候选已完整覆盖且没有新证据时，不创建文件。
+- 存在新边界、新反例或独立验证证据时，创建新文件，在 `related_candidates` 中引用已有文件名，并只描述增量。
+- 不修改、覆盖、重命名或删除已有候选文件。
 
 ## Promotion Checklist
 

@@ -1,6 +1,6 @@
 # Deploy Skills
 
-面向部署任务的 Agent Skills 集合，采用“安装包 + 工作区资源 + JSON 索引 + 分级路由 + 叶子 Skill”的组织方式。当前版本为 `0.5.0`。
+面向部署任务的 Agent Skills 集合，采用“安装包 + 工作区资源 + JSON 索引 + 分级路由 + 叶子 Skill”的组织方式。当前版本为 `0.5.1`。
 
 ## 目录结构
 
@@ -33,7 +33,7 @@ deploy_skills/
 ### Skill Governance
 
 - `deployment-session-intake`：每次新对话开始时收集编译命令、BC 服务器与推理命令、部署方式、板端环境和验收标准；同一对话复用，跨对话重新询问。
-- `alignment-skill-journal`：每次开发验证后评估并记录新的对齐 Skill 候选，正式 Skill 只在人工评审后晋升。
+- `alignment-skill-journal`：每次开发验证后评估新的对齐 Skill 候选，以描述性文件名投递到共享评审目录，正式 Skill 只在人工评审后晋升。
 
 ### Model Export
 
@@ -48,6 +48,14 @@ bash setup.sh <project-root>
 ```
 
 安装后，`deploy/` 中的资源会复制到目标项目的 `.deploy/`，并向已有的 `AGENTS.md` 或 `CLAUDE.md` 注入入口规则。重复执行不会重复注入规则。`skill-index.json` 中的路径以安装后的项目根目录为基准，因此使用 `.deploy/`，不是源码包中的 `deploy/`。
+
+安装器会复制 `.deploy/candidate-drop.conf` 和候选生成器。候选默认写入 `/home/public/zjj/skills_pr`，每个候选使用 `<任务摘要>__<新技能摘要>__<UTC时间>.md` 独立文件；同名冲突自动追加序号且不会覆盖已有文件。投递不依赖网络或 Git 权限，评审者定期从共享目录提炼并合入正式 Skill。
+
+共享目录由管理员一次性初始化；sticky bit 允许每个用户新建文件，同时阻止用户删除或重命名其他用户的文件：
+
+```bash
+install -d -m 1777 /home/public/zjj/skills_pr
+```
 
 安装采用覆盖更新，不主动删除目标 `.deploy/` 中源包已不存在的文件，避免误删项目自有资源；升级后以 `skill-index.json` 中已注册的 Skill 为准。
 

@@ -80,18 +80,18 @@
       "description": "按变更文档完成模型版本 C++ 适配和板端可视化验收；不对齐时依次执行开环代码分析、闭环 BC dump/HBM 回放和异构后端差异定位。"
     },
     "governance": {
-      "version": "0.2.0",
+      "version": "0.3.0",
       "module": "governance",
       "path": ".deploy/skills/governance",
       "skillFile": ".deploy/skills/governance/SKILL.md",
       "description": "Deploy Skills 治理路由：新对话环境问询，以及开发后的候选经验评估、去重、评审和晋升。"
     },
     "alignment-skill-journal": {
-      "version": "0.1.0",
+      "version": "0.3.0",
       "module": "governance",
       "path": ".deploy/skills/governance/alignment-skill-journal",
       "skillFile": ".deploy/skills/governance/alignment-skill-journal/SKILL.md",
-      "description": "每次开发结束后自动评估是否产生新的对齐 Skill 候选；命中时写入工作区临时日志，并支持去重、证据增强和定期晋升。"
+      "description": "每次开发结束后自动评估是否产生新的对齐 Skill 候选；命中时按任务和新技能摘要命名，写入共享评审目录，并支持跨项目查重和定期晋升。"
     },
     "deployment-session-intake": {
       "version": "0.1.0",
